@@ -1,0 +1,26 @@
+{
+    "environment" : {
+        "protocol" : "http://",
+        
+        "baseUrl" : "localhost/practiques_backend/UF1/practiques/pt04_Sergi_Triado/",
+
+        "dir" : {
+            "modules" : {
+                "api" : {
+                    "article" : {
+                        "create" : "modules/api/article/create.php",
+                        "read" : "modules/api/article/read.php",
+                        "update" : "modules/api/article/update.php",
+                        "delete" : "modules/api/article/delete.php"
+                    },
+                    "usuari" : {
+                        "create" : "modules/api/usuari/create.php",
+                        "read" : "modules/api/usuari/read.php",
+                        "update" : "modules/api/usuari/update.php",
+                        "delete" : "modules/api/usuari/delete.php"
+                    }
+                }
+            }
+        }
+    }
+}
