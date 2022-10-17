@@ -4,57 +4,57 @@
 * @author: Sergi Triadó <s.triado@sapalomera.cat>
 *
 */
-    class Article implements JsonSerializable{
-
+    class Usuari implements JsonSerializable {
+        
         // PROPERTIES
         private $id;
-        private $article;
-        private $autor;
+        private $username;
+        private $pwd;
 
-        // CONSTRUCT
-        public function __construct($article, $autor, $id = null){
-            $this->article = $article;
-            $this->autor = $autor;
+        // CONSTRUCTOR
+        public function __construct($username, $pwd, $id = null){
             $this->id = $id;
+            $this->username = $username;
+            $this->pwd = $pwd;
         }
 
         // GETTERS
-        public function getArticle(){
-            return $this->article;
-        }
-        public function getAutor(){
-            return $this->autor;
-        }
         public function getId(){
             return $this->id;
         }
+        public function getUsername(){
+            return $this->username;
+        }
+        public function getPwd(){
+            return $this->pwd;
+        }
 
         // SETTERS
-        public function setArticle($article){
-            $this->article = $article;
-        }
-        public function setAutor($autor){
-            $this->autor = $autor;
-        }
         public function setId($id){
             $this->id = $id;
         }
+        public function setUsername($username){
+            $this->username = $username;
+        }
+        public function setPwd($pwd){
+            $this->pwd = $pwd;
+        }
 
-        // METHODS        
+        // METHODS
         /**
          * create
          *
          * @return boolean
          * 
-         * Métode per introduir un article a la BBDD
+         * Métode per introduir un usuari a la BBDD
          */
         public function create(){
-            $query = "INSERT INTO articles (id, article, autor)
-                        VALUES (:id, :article, :autor)";
+            $query = "INSERT INTO articles (id, username, pwd)
+                        VALUES (:id, :username, :pwd)";
 
             $params = array(':id' => $this->getId(),
-                            ':article' => strtoupper($this->getArticle()),
-                            ':autor' => strtoupper($this->getAutor()), 
+                            ':username' => strtoupper($this->getUsername()),
+                            ':pwd' => strtoupper($this->getPwd()), 
             );
 
             Connexio::connect();
@@ -72,7 +72,7 @@
          *
          * @return void
          * 
-         * Métode per eliminar un article de la BBDD
+         * Métode per eliminar un usuari de la BBDD
          */
         public function delete(){
             $query = "DELETE FROM usuaris WHERE id = :id";
@@ -91,12 +91,12 @@
          *
          * @return void
          * 
-         * Métode per modificar un article de la BBDD
+         * Métode per modificar un usuari de la BBDD
          */
         public function update(){
-            $query = "UPDATE usuaris SET autor = :autor, article = :article WHERE id = :id";
+            $query = "UPDATE usuaris SET username = :username, pwd = :pwd WHERE id = :id";
 
-            $params = array(':autor' => $this->getAutor(), ':article' => $this->getArticle(), ':id' => $this->getId());
+            $params = array(':username' => $this->getUsername(), ':pwd' => $this->getPwd(), ':id' => $this->getId());
 
             Connexio::connect();
             $stmt = Connexio::execute($query, $params);
@@ -104,20 +104,21 @@
             
             return $stmt;
         }
-        
+
+
         /**
          * jsonSerialize
          *
          * @return JSONObject
          * 
-         * Métode de la interfícia JsonSerializable que indica la seva estructura quan es converteixi a JSON
+         * Métode de la interfície JsonSerializable que indica la seva estructura quan es converteixi a JSON
          */
         public function jsonSerialize(){
             return [
-                'article' => $this->getArticle(),
-                'id' => $this->getId(),
-                'autor' => $this->getAutor()
+                'username' => $this->getUsername(),
+                'pwd' => $this->getPwd(),
+                'id' => $this->getId()
             ];
         }
-}
+    }
 ?>

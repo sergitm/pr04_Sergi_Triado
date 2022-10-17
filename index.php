@@ -89,6 +89,6 @@ $quantitat = intval($count_res['quantitat']);
 
 $maxim_pagines = ($quantitat % $post_per_pag > 0) ? floor($quantitat / $post_per_pag + 1) : floor($quantitat / $post_per_pag);
 
-require 'templates/articles.vista.php';
+require 'templates/articles/articles.vista.php';
 
 ?>

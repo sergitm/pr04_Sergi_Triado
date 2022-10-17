@@ -1,4 +1,9 @@
 <?php 
+/**
+*
+* @author: Sergi Triadó <s.triado@sapalomera.cat>
+*
+*/
     require_once "../config/database.php";
     require_once "../control/llista_articles.php";
     require_once "../../model/article.php";

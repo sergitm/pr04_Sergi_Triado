@@ -1,4 +1,9 @@
 <?php
+/**
+*
+* @author: Sergi Triadó <s.triado@sapalomera.cat>
+*
+*/
     class HttpRequest {
 
         private $environment;
