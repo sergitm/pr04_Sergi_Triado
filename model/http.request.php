@@ -10,7 +10,7 @@
 
         // CONSTRUCTOR
         public function __construct(){
-            $env = json_decode(file_get_contents("../environment/environment.json"));
+            $env = json_decode(file_get_contents("../../environment/environment.json"));
             $this->environment = $env->environment;
         }
 

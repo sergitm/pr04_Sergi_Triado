@@ -7,7 +7,7 @@
             $http = new HttpRequest();
             $environment = $http->getEnvironment();
 
-            $url = $environment->baseUrl . $environment->dir->modules->api->usuari->read;
+            $url = $environment->protocol . $environment->baseUrl . $environment->dir->modules->api->usuari->read;
             $data = array('username' => $username);
             $res = $http->makePostRequest($url, $data);
 

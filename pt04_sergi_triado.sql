@@ -2,13 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
-/**
-*
-* @author: Sergi Triadó <s.triado@sapalomera.cat>
-*
-*/
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-10-2022 a las 16:07:04
+-- Tiempo de generación: 20-10-2022 a las 16:56:44
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -23,14 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `pt03_sergi_triado`
+-- Base de datos: `pt04_sergi_triado`
 --
 
-DROP DATABASE IF EXISTS `pt03_sergi_triado`;
+DROP DATABASE IF EXISTS `pt04_sergi_triado`;
 
-CREATE DATABASE IF NOT EXISTS `pt03_sergi_triado`;
+CREATE DATABASE IF NOT EXISTS `pt04_sergi_triado`;
 
-USE `pt03_sergi_triado`;
+USE `pt04_sergi_triado`;
+
 
 -- --------------------------------------------------------
 
@@ -60,6 +56,19 @@ INSERT INTO `articles` (`id`, `article`) VALUES
 (10, 'Behind sooner dining so window excuse he summer. Breakfast met certainty and fulfilled propriety led. Waited get either are wooded little her. Contrasted unreserved as mr particular collecting it everything as indulgence. Seems ask meant merry could put. Age old begin had boy noisy table front whole given.'),
 (11, 'Are own design entire former get should. Advantages boisterous day excellence boy. Out between our two waiting wishing. Pursuit he he garrets greater towards amiable so placing. Nothing off how norland delight. Abode shy shade she hours forth its use. Up whole of fancy ye quiet do. Justice fortune no to is if winding morning forming.');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuaris`
+--
+
+CREATE TABLE `usuaris` (
+  `id` int(11) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` text NOT NULL,
+  `email` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Índices para tablas volcadas
 --
@@ -71,6 +80,14 @@ ALTER TABLE `articles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `usuaris`
+--
+ALTER TABLE `usuaris`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique` (`username`),
+  ADD UNIQUE KEY `EMAIL_UNIQUE` (`email`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -79,6 +96,12 @@ ALTER TABLE `articles`
 --
 ALTER TABLE `articles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `usuaris`
+--
+ALTER TABLE `usuaris`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
