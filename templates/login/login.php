@@ -8,6 +8,7 @@
 
         header('Location: ' . $url);
     } else {
+        
         include "signup.php";
     }
 ?>

@@ -2,7 +2,7 @@
     "environment" : {
         "protocol" : "http://",
         
-        "baseUrl" : "localhost/practiques_backend/UF1/practiques/pt04_Sergi_Triado/",
+        "baseUrl" : "localhost/practiques_backend/UF2/pt04_Sergi_Triado/",
 
         "dir" : {
             "modules" : {

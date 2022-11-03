@@ -11,7 +11,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">  
+    <link href="public/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="public/styles/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<link rel="stylesheet" href="public/styles/estils.css"> <!-- feu referència al vostre fitxer d'estils -->
 	<title>Paginació</title>
 </head>
@@ -30,13 +31,13 @@
 			</ul>
 		</section>
 		<form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-			<textarea name='article' rows='10' cols='50' placeholder="Escriu un nou article"></textarea><br>
+			<textarea class="form-control" name='article' rows='5' placeholder="Escriu un nou article"></textarea><br>
 			<?php if (isset($insert) && $insert === true) { ?>
 				<p style="color:green">Article afegit.</p>
 			<?php } elseif (isset($insert) && $insert === false) { ?>
 				<p style="color:red">Article no afegit.</p>
 			<?php } ?>
-			<input class="insertar" type="submit" name="insertArticle" value="Publicar">
+			<input class="btn btn-primary mb-4" type="submit" name="insertArticle" value="Publicar">
 		</form>
 
 		<section class="paginacio">

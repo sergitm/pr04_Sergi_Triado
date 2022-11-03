@@ -9,12 +9,14 @@
         // PROPERTIES
         private $id;
         private $username;
+        private $email;
         private $pwd;
 
         // CONSTRUCTOR
-        public function __construct($username, $pwd, $id = null){
+        public function __construct($username, $pwd, $email, $id = null){
             $this->id = $id;
             $this->username = $username;
+            $this->email = $email;
             $this->pwd = $pwd;
         }
 
@@ -24,6 +26,9 @@
         }
         public function getUsername(){
             return $this->username;
+        }
+        public function getEmail(){
+            return $this->email;
         }
         public function getPwd(){
             return $this->pwd;
@@ -39,6 +44,9 @@
         public function setPwd($pwd){
             $this->pwd = $pwd;
         }
+        public function setEmail($email){
+            $this->email = $email;
+        }
 
         // METHODS
         /**
@@ -49,12 +57,13 @@
          * Métode per introduir un usuari a la BBDD
          */
         public function create(){
-            $query = "INSERT INTO articles (id, username, pwd)
-                        VALUES (:id, :username, :pwd)";
+            $query = "INSERT INTO articles (id, username, pwd, email)
+                        VALUES (:id, :username, :pwd, :email)";
 
             $params = array(':id' => $this->getId(),
                             ':username' => strtoupper($this->getUsername()),
-                            ':pwd' => strtoupper($this->getPwd()), 
+                            ':pwd' => $this->getPwd(),
+                            ':email' => strtoupper($this->getEmail())
             );
 
             Connexio::connect();
@@ -94,9 +103,9 @@
          * Métode per modificar un usuari de la BBDD
          */
         public function update(){
-            $query = "UPDATE usuaris SET username = :username, pwd = :pwd WHERE id = :id";
+            $query = "UPDATE usuaris SET username = :username, pwd = :pwd, email = :email WHERE id = :id";
 
-            $params = array(':username' => $this->getUsername(), ':pwd' => $this->getPwd(), ':id' => $this->getId());
+            $params = array(':username' => strtoupper($this->getUsername()), ':pwd' => $this->getPwd(), ':email' => strtoupper($this->getEmail()), ':id' => $this->getId());
 
             Connexio::connect();
             $stmt = Connexio::execute($query, $params);
@@ -117,6 +126,7 @@
             return [
                 'username' => $this->getUsername(),
                 'pwd' => $this->getPwd(),
+                'email' => $this->getEmail(),
                 'id' => $this->getId()
             ];
         }

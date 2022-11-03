@@ -5,12 +5,16 @@
 *
 */
 
+// Barra de navegació 
+
+include "public/navbar.php";
+
 // Ens connectem a la base de dades	
 
 $conn = null;
 
 try{
-    $conn = new PDO('mysql:host=' . 'localhost' . ';dbname=' . 'pt03_sergi_triado', 'root', '');
+    $conn = new PDO('mysql:host=' . 'localhost' . ';dbname=' . 'pt04_sergi_triado', 'root', '');
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
 
