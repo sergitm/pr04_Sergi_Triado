@@ -17,7 +17,7 @@
             $errors['email']['missing'] = true;
         } else {
             $emailPattern = '/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/';
-            (!preg_match($pattern, $_POST['email'])) ? $errors['email']['invalid'] = true : "";
+            (!preg_match($emailPattern, $_POST['email'])) ? $errors['email']['invalid'] = true : "";
             (Validator::emailExists($_POST['email'])) ? $errors['email']['exists'] = true : "";
         }
 
@@ -29,8 +29,6 @@
             (!preg_match($pattern, $_POST['pwd'])) ? $errors['pwd']['invalid'] = true : "";
             (!empty($_POST['pwdRepeat']) && ($_POST['pwd'] !== $_POST['pwdRepeat'])) ? $errors['pwd']['unmatched'] = true : "";
             
-            echo $_POST['pwdRepeat'];
-            echo $_POST['pwd'];
         }
     }
 
@@ -42,10 +40,26 @@
 
         $data = array(
             'username' => $_POST['username'],
+            'email' => $_POST['email'],
             'pwd' => password_hash($_POST['pwd'], PASSWORD_BCRYPT));
 
         $url = $environment->protocol . $environment->baseUrl . $environment->dir->modules->api->usuari->create;
+        
         $res = $http->makePostRequest($url, $data);
+
+        if ($res) {
+            if (isset($res->error)) {
+                print "<h1 class='text-danger' style='text-align:center'>" . $res->error . "</h1>";
+            } else {
+                print "<h1 class='text-success' style='text-align:center'>" . $res->message . "</h1>";
+                
+                session_start();
+                $_SESSION['username'] = $res->username;
+                header("refresh:1;url=" . $environment->protocol . $environment->baseUrl);
+            }
+        } else {
+            print "<h1 class='text-danger' style='text-align:center'>Hi ha hagut un error amb el registre</h1>";
+        }
     }
 ?>
 

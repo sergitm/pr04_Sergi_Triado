@@ -6,18 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../public/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="../../public/styles/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <link href="../../public/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="../../public/fontawesome/css/brands.css" rel="stylesheet">
+    <link href="../../public/fontawesome/css/solid.css" rel="stylesheet">
     <link href="../../public/styles/estils.css" rel="stylesheet">
     <title>Sign Up</title>
 </head>
 <body>
-<?php include "../../public/navbar.php"; ?>
-    <div class="container bg-light rounded">
+    <?php 
+        $env = json_decode(file_get_contents("../../environment/environment.json"));
+        $environment = $env->environment;
+        
+        define('BASE_URL', $environment->protocol . $environment->baseUrl);
+
+        include "../../public/navbar.php"; 
+    ?>
+    <div class="container bg-light rounded" style="max-width: 50%;">
         <h1>Formulari de registre</h1>
         <div class="form-inline justify-content-center">
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-            <div>
+            <div class="container">
                 <div class="form-group row mb-1">
-                    <label class="col-7 justify-content-end">Introdueix un nom d'usuari: </label>
+                    <label class="col justify-content-end">Introdueix un nom d'usuari: </label>
                     <input type="text" class="form-control col-5 <?php echo (isset($errors['username']['missing'])) ? 'is-invalid' : '' ?>" name="username" placeholder="Username" 
                         value="<?php echo (empty($_POST['username'])) ? '' : $_POST['username'] ?>">
                 </div>
@@ -54,8 +64,8 @@
                             <li class="col-10">La contrasenya ha de combinar números, lletres i símbols.</li>
                         </small>
                     </ul>
-                <div class="d-flex">
-                    <a href="login.php" class="mr-auto align-self-center">Ja tens compte? Entra!</a>
+                <div class="container d-inline-flex justify-content-between mb-3">
+                    <a href="login.view.php" class="align-self-center">Ja tens compte? Entra!</a>
                     <input type="submit" class="btn btn-primary align-self-center" name="registrar" value="Enregistrar-se">
                 </div>
             </div>

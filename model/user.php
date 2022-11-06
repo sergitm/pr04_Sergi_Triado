@@ -57,7 +57,7 @@
          * Métode per introduir un usuari a la BBDD
          */
         public function create(){
-            $query = "INSERT INTO articles (id, username, pwd, email)
+            $query = "INSERT INTO usuaris (id, username, password, email)
                         VALUES (:id, :username, :pwd, :email)";
 
             $params = array(':id' => $this->getId(),
