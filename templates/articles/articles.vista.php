@@ -13,9 +13,9 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link href="public/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="public/styles/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<link href="../../public/fontawesome/css/fontawesome.css" rel="stylesheet">
-    <link href="../../public/fontawesome/css/brands.css" rel="stylesheet">
-    <link href="../../public/fontawesome/css/solid.css" rel="stylesheet">
+	<link href="public/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="public/fontawesome/css/brands.css" rel="stylesheet">
+    <link href="public/fontawesome/css/solid.css" rel="stylesheet">
 	<link rel="stylesheet" href="public/styles/estils.css"> <!-- feu referència al vostre fitxer d'estils -->
 	<title>Paginació</title>
 </head>
@@ -41,7 +41,7 @@
 			<?php } elseif (isset($insert) && $insert === false) { ?>
 				<p style="color:red">Article no afegit.</p>
 			<?php } ?>
-			<input class="btn btn-primary mb-4" type="submit" name="insertArticle" value="Publicar">
+			<input class="btn btn-dark mb-4" type="submit" name="insertArticle" value="Publicar">
 		</form>
 		<?php endif; ?>
 		<section class="paginacio">

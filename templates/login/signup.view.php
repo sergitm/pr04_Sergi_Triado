@@ -65,8 +65,8 @@
                         </small>
                     </ul>
                 <div class="container d-inline-flex justify-content-between mb-3">
-                    <a href="login.view.php" class="align-self-center">Ja tens compte? Entra!</a>
-                    <input type="submit" class="btn btn-primary align-self-center" name="registrar" value="Enregistrar-se">
+                    <a href="login.php" class="align-self-center">Ja tens compte? Entra!</a>
+                    <input type="submit" class="btn btn-dark align-self-center" name="registrar" value="Enregistrar-se">
                 </div>
             </div>
             </form>
