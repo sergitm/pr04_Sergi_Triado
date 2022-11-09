@@ -33,7 +33,8 @@
     }
 
     include "signup.view.php";
-
+    var_dump($errors);
+    var_dump($_POST);
     if(!empty($_POST['registrar']) && empty($errors)){
         $http = new HttpRequest();
         $environment = $http->getEnvironment();
@@ -46,7 +47,7 @@
         $url = $environment->protocol . $environment->baseUrl . $environment->dir->modules->api->usuari->create;
         
         $res = $http->makePostRequest($url, $data);
-
+             
         if ($res) {
             if (isset($res->error)) {
                 print "<h1 class='text-danger' style='text-align:center'>" . $res->error . "</h1>";

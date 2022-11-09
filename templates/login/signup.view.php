@@ -30,11 +30,17 @@
                     <label class="col justify-content-end">Introdueix un nom d'usuari: </label>
                     <input type="text" class="form-control col-5 <?php echo (isset($errors['username']['missing'])) ? 'is-invalid' : '' ?>" name="username" placeholder="Username" 
                         value="<?php echo (empty($_POST['username'])) ? '' : $_POST['username'] ?>">
+                    <?php if(isset($errors['username']['exists'])) : ?>
+                            <small class="text-danger col-10">L'usuari ja existeix</small>
+                    <?php endif; ?>
                 </div>
                 <div class="form-group row mb-1">
                     <label class="col-7 justify-content-end">Introdueix el teu email: </label>
                     <input type="text" class="form-control col-5 <?php echo (isset($errors['email']['missing'])) ? 'is-invalid' : '' ?>" name="email" placeholder="Adreça electrònica"
                         value="<?php echo (empty($_POST['email'])) ? '' : $_POST['email'] ?>">
+                    <?php if(isset($errors['email']['exists'])) : ?>
+                            <small class="text-danger col-10">L'email ja existeix</small>
+                    <?php endif; ?>                    
                 </div>
                 <div class="form-group row mb-1">
                     <label class="col-7 justify-content-end">Introdueix la teva contrasenya: </label>

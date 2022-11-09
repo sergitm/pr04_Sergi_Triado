@@ -45,7 +45,7 @@
                 </div>
                 <div class="container d-inline-flex justify-content-between mb-3">
                     <a href="signup.php" class="align-self-center">No tens compte? Registra't!</a>
-                    <input type="submit" class="btn btn-dark align-self-center" name="login " value="Entrar">
+                    <input type="submit" class="btn btn-dark align-self-center" name="login" value="Entrar">
                 </div>
             </div>
             </form>
