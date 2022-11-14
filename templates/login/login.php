@@ -31,46 +31,39 @@
         }
 
         include "login.view.php";
+        include "../../model/validator.php";
+        
+        if(isset($_POST['g-recaptcha-response'])) {
 
-        if (isset($_SESSION['tries']) && $_SESSION['tries'] > 2) {
-            include "recaptcha.php";
-        }
+            $captcha = $_POST['g-recaptcha-response'];
+            $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LehXggjAAAAABT6PC82AnmT2htXRHsVxerjwHyc&response=".$captcha);
+            $g_response = json_decode($response);
 
-        if(!empty($_POST['login']) && empty($errors)){
-
-            include "../../model/http.request.php";
-            $_SESSION['tries'] ??= 0;
-
-            $http = new HttpRequest("../../environment/environment.json");
-            $environment = $http->getEnvironment();
-            $url = $environment->protocol . $environment->baseUrl . $environment->dir->modules->api->usuari->read;
-
-            $data = array(
-                'login' => true,
-                'identifier' => $_POST['identifier']
-            );
+            if ($g_response->success === true) {
+                if(Validator::auth($_POST['identifier'], $_POST['pwd'])){
+                    $_SESSION['tries'] = 0;
+                    session_regenerate_id(true);
+                    $_SESSION = array();
+                    $_SESSION['username'] = ucwords(strtolower($res->username));    
+                    header("Location: " . $environment->protocol . $environment->baseUrl);
+                } else {
+                    $_SESSION['tries']++;
+                }
+            }
+        } else {
+            if(!empty($_POST['login']) && empty($errors)){
             
-            $res = $http->makePostRequest($url, $data);
-            
-            if ($res !== null) {
-                if($res->auth){
-                    if(password_verify($_POST['pwd'], $res->phash)){
-
+                $_SESSION['tries'] ??= 1;
+    
+                if(Validator::auth($_POST['identifier'], $_POST['pwd'])){
+                    $_SESSION['tries'] = 0;
+                        
                         session_regenerate_id(true);
                         $_SESSION = array();
                         $_SESSION['username'] = ucwords(strtolower($res->username));
                         
                         header("Location: " . $environment->protocol . $environment->baseUrl);
-                    } else {
-                        $_SESSION['tries']++;
-                        print "<h1 class='text-danger' style='text-align:center'>Contrasenya incorrecta</h1>";
-                    }
-
-                } else {
-                    print "<h1 class='text-danger' style='text-align:center'>" . $res->missatge . "</h1>";
                 }
-            } else {
-                print "<h1 class='text-danger' style='text-align:center'>Hi ha hagut un error amb el procés d'autenticació</h1>";
             }
         }
     }

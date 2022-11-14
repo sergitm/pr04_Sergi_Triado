@@ -36,8 +36,35 @@
             }
         }
 
-        public static function pwdValidation($pwd){
+        public static function auth($id, $pwd){
+            $http = new HttpRequest("../../environment/environment.json");
+            $environment = $http->getEnvironment();
+            $url = $environment->protocol . $environment->baseUrl . $environment->dir->modules->api->usuari->read;
+
+            $data = array(
+                'login' => true,
+                'identifier' => $id
+            );
             
+            $res = $http->makePostRequest($url, $data);
+            
+            if ($res !== null) {
+                if($res->auth){
+                    if(password_verify($pwd, $res->phash)){
+                        return true;
+                    } else {
+                        print "<h1 class='text-danger' style='text-align:center'>Contrasenya incorrecta</h1>";
+                        return false;
+                    }
+
+                } else {
+                    print "<h1 class='text-danger' style='text-align:center'>" . $res->missatge . "</h1>";
+                    return false;
+                }
+            } else {
+                print "<h1 class='text-danger' style='text-align:center'>Hi ha hagut un error amb el procés d'autenticació</h1>";
+                return false;
+            }
         }
 
     }

@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.google.com/recaptcha/api.js"></script>
     <link href="../../public/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="../../public/styles/bootstrap/js/bootstrap.bundle.min.js"></script>
     <link href="../../public/fontawesome/css/fontawesome.css" rel="stylesheet">
@@ -50,9 +51,12 @@
                 </div>
                 <div class="container d-inline-flex justify-content-between mb-3">
                     <a href="signup.php" class="align-self-center">No tens compte? Registra't!</a>
-                    <input type="submit" class="btn btn-dark align-self-center" name="login" value="Entrar" <?php echo (isset($_SESSION['tries']) && $_SESSION['tries'] > 2) ? 'disabled' : ''; ?>>
+                    <input type="submit" class="btn btn-dark align-self-center" name="login" value="Entrar">
                 </div>
-            </div>
+            </div>        
+            <?php if (isset($_SESSION['tries']) && $_SESSION['tries'] > 2) :?>
+                <div class="g-recaptcha d-flex align-items-center justify-content-center pb-3" data-sitekey="6LehXggjAAAAABrjqhHm6HHuovLVeudx0PxWKfKY"></div>
+            <?php endif; ?>
             </form>
         </div>
     </div>
