@@ -1,4 +1,9 @@
 <?php 
+/**
+*
+* @author: Sergi Triadó <s.triado@sapalomera.cat>
+*
+*/
     //headers
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: POST');
@@ -9,23 +14,30 @@
     require_once "../../../model/user.php";
     require_once "../../control/control_usuaris.php";
 
-    if (!empty($_POST['identifier']) && !empty($_POST['pwd'])) {
-        if(ControlUsuaris::user_auth($_POST['identifier'], $_POST['pwd'])){
+    if (!empty($_POST['check'])) {
+        if (!empty($_POST['username'])) {
+            if (ControlUsuaris::user_exists($_POST['username'])) $res = array('username' => true);
+        }
+        if (!empty($_POST['email'])) {
+            if (ControlUsuaris::email_exists($_POST['email'])) $res = array('email' => true);
+        }
+    }
+
+    if (!empty($_POST['identifier']) && !empty($_POST['login'])) {
+        try{
+            $user = ControlUsuaris::get_usuari($_POST['identifier']);
+
             $res = array(
                 'auth' => true,
-                'username' => $_POST['username']
+                'username' => $user->getUsername(),
+                'phash' => $user->getPwd()
             );
-        } else {
+        } catch(Exception $e){
             $res = array(
                 'auth' => false,
-                'missatge' => "Identificador o contrasenya incorrecte/a"
+                'missatge' => "L'usuari no existeix"
             );
         }
-
-    } else {
-        $res = array(
-            'missatge' => "Falten dades per autenticar l'usuari"
-        );
     }
 
     echo json_encode($res);

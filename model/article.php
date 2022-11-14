@@ -49,11 +49,11 @@
          * Métode per introduir un article a la BBDD
          */
         public function create(){
-            $query = "INSERT INTO articles (id, article, autor)
+            $query = "INSERT INTO articles (id, article, user)
                         VALUES (:id, :article, :autor)";
 
             $params = array(':id' => $this->getId(),
-                            ':article' => strtoupper($this->getArticle()),
+                            ':article' => $this->getArticle(),
                             ':autor' => strtoupper($this->getAutor()), 
             );
 
@@ -75,15 +75,19 @@
          * Métode per eliminar un article de la BBDD
          */
         public function delete(){
-            $query = "DELETE FROM usuaris WHERE id = :id";
+            $query = "DELETE FROM articles WHERE id = :id";
 
             $params = array(':id' => $this->getId());
 
             Connexio::connect();
             $stmt = Connexio::execute($query, $params);
             Connexio::close();
-
-            return $stmt;
+            
+            if ($stmt) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
         }
         
         /**
@@ -94,7 +98,7 @@
          * Métode per modificar un article de la BBDD
          */
         public function update(){
-            $query = "UPDATE usuaris SET autor = :autor, article = :article WHERE id = :id";
+            $query = "UPDATE articles SET user = :autor, article = :article WHERE id = :id";
 
             $params = array(':autor' => $this->getAutor(), ':article' => $this->getArticle(), ':id' => $this->getId());
 
@@ -102,7 +106,11 @@
             $stmt = Connexio::execute($query, $params);
             Connexio::close();
             
-            return $stmt;
+            if ($stmt) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
         }
         
         /**

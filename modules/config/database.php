@@ -46,12 +46,32 @@
             }
         }
 
+        public static function getConn(){
+            return self::$conn;
+        }
+
         public static function execute($query, $params = array()){
             // Prepare
             $stmt = self::$conn->prepare($query);
 
             // Execute query
             if($stmt->execute($params)){
+                return $stmt;
+            } else {
+                return false;
+            }
+        }
+
+        public static function execute_int_params($query, $params){
+            // Prepare
+            $stmt = self::$conn->prepare($query);
+
+            foreach ($params as $key => $value) {
+                $stmt->bindParam($key, $params[$key], PDO::PARAM_INT);
+            }
+
+            // Execute query
+            if($stmt->execute()){
                 return $stmt;
             } else {
                 return false;

@@ -9,8 +9,8 @@
         private $environment;
 
         // CONSTRUCTOR
-        public function __construct(){
-            $env = json_decode(file_get_contents("../../environment/environment.json"));
+        public function __construct($env_url){
+            $env = json_decode(file_get_contents($env_url));
             $this->environment = $env->environment;
         }
 

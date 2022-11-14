@@ -1,3 +1,8 @@
+<!-- /**
+*
+* @author: Sergi Triadó <s.triado@sapalomera.cat>
+*
+*/ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +72,7 @@
                             <li class="col-10">La contrasenya ha de tenir 8 caràcters mínim.</li>
                         </small>  
                         <small class="<?php echo empty($errors['pwd']['invalid']) ? 'text-info' : 'text-danger' ?>">
-                            <li class="col-10">La contrasenya ha de combinar números, lletres i símbols.</li>
+                            <li class="col-10">La contrasenya ha de combinar números, símbols, majúscules i minúscules. Exemple: P@ssw0rd o qA!12345</li>
                         </small>
                     </ul>
                 <div class="container d-inline-flex justify-content-between mb-3">

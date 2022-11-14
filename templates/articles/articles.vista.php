@@ -28,9 +28,29 @@
 		</form>
 		<section class="articles"> <!--aqui guardem els articles-->
 			<ul>
-					<?php foreach ($result as $article) { ?>
-						<li><?php echo $article['id'] . ".- " . $article['article'] ?></li>
+				<?php if ($num != 0) : ?>
+					<?php foreach ($result->articles as $article) { ?>
+						<li><?php echo $article->id . ".- " . $article->article ?>
+						<?php if (isset($_SESSION['username'])) : ?>
+							<div class="d-flex justify-content-between">
+								<form class="d-inline-flex" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+									<button type="submit" class="m-1" name="<?php echo $article->id ?>" formaction="templates/articles/update.php">
+										<i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+									</button>
+									<button type="submit" class="m-1" name="<?php echo $article->id ?>" formaction="templates/articles/delete.php">
+										<i class="fa fa-trash" aria-hidden="true"></i>
+									</button>
+								</form>
+								<p class="<?php if(!isset($_SESSION['username'])) {echo 'ml-auto';} ?>"><?php echo ucwords(strtolower($article->autor)) ?></p>
+							</div>
+						<?php else : ?>
+							<p class="d-flex flex-row-reverse"><?php echo ucwords(strtolower($article->autor)) ?></p>
+						<?php endif; ?>
+						</li>
 					<?php } ?>
+				<?php else : ?>
+					<li><p class="text-info">No hi han articles.</p></li>
+				<?php endif; ?>
 			</ul>
 		</section>
 		<?php if(isset($_SESSION['username'])): ?>
