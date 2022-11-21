@@ -7,19 +7,15 @@
     ini_set('session.gc_maxlifetime', 1800);
     session_set_cookie_params(1800);
     session_start();
-
+    $_SESSION['tries'] ??= 1;
     if (isset($_SESSION['username'])) {
 
         $env = json_decode(file_get_contents("../../environment/environment.json"));
         $environment = $env->environment;
-        $url = $environment->protocol . $environment->baseUrl;
-
-        
-        setcookie(session_name(),'',0,'/');
-        session_destroy();
-        session_write_close();
+        $url = $environment->protocol . $environment->baseUrl . $environment->dir->templates->logout;
 
         header('Location: ' . $url);
+        
     } else {
         if (!empty($_POST['login'])) {
             
@@ -41,29 +37,17 @@
 
             if ($g_response->success === true) {
                 if(Validator::auth($_POST['identifier'], $_POST['pwd'])){
-                    $_SESSION['tries'] = 0;
-                    session_regenerate_id(true);
-                    $_SESSION = array();
-                    $_SESSION['username'] = ucwords(strtolower($res->username));    
+                    $_SESSION['tries'] = 1;  
                     header("Location: " . $environment->protocol . $environment->baseUrl);
-                } else {
-                    $_SESSION['tries']++;
-                }
+                } 
             }
-        } else {
-            if(!empty($_POST['login']) && empty($errors)){
-            
-                $_SESSION['tries'] ??= 1;
-    
-                if(Validator::auth($_POST['identifier'], $_POST['pwd'])){
-                    $_SESSION['tries'] = 0;
-                        
-                        session_regenerate_id(true);
-                        $_SESSION = array();
-                        $_SESSION['username'] = ucwords(strtolower($res->username));
-                        
-                        header("Location: " . $environment->protocol . $environment->baseUrl);
-                }
+        }
+        if(!empty($_POST['login']) && empty($errors)){
+            if(Validator::auth($_POST['identifier'], $_POST['pwd'])){
+                $_SESSION['tries'] = 1;     
+                header("Location: " . $environment->protocol . $environment->baseUrl);
+            } else {
+                $_SESSION['tries']++;
             }
         }
     }

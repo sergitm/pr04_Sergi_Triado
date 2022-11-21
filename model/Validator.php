@@ -51,6 +51,9 @@
             if ($res !== null) {
                 if($res->auth){
                     if(password_verify($pwd, $res->phash)){
+                        session_regenerate_id(true);
+                        $_SESSION = array();
+                        $_SESSION['username'] = ucwords(strtolower($res->username));  
                         return true;
                     } else {
                         print "<h1 class='text-danger' style='text-align:center'>Contrasenya incorrecta</h1>";
@@ -67,5 +70,22 @@
             }
         }
 
+        public static function userExist($identifier){
+            $http = new HttpRequest("../../../environment/environment.json");
+            $environment = $http->getEnvironment();
+            $url = $environment->protocol . $environment->baseUrl . $environment->dir->modules->api->usuari->read;
+
+            $data = array(
+                'check' => true,
+                'identifier' => $identifier
+            );
+            
+            $res = $http->makePostRequest($url, $data);
+            if ($res != null) {
+                return $res;
+            } else {
+                return null;
+            }
+        }
     }
 ?>

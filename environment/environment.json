@@ -2,7 +2,7 @@
     "environment" : {
         "protocol" : "http://",
         
-        "baseUrl" : "localhost/practiques_backend/UF2/pt04_Sergi_Triado/",
+        "baseUrl" : "localhost/pt04_Sergi_Triado/",
 
         "dir" : {
             "modules" : {
@@ -20,6 +20,16 @@
                         "delete" : "modules/api/usuari/delete.php"
                     }
                 }
+            },
+            "templates" : {
+                "login" : "templates/login/login.php",
+                "logout" : "templates/login/logout.php",
+                "signup" : "templates/login/signup.php",
+                "socials" : { 
+                    "steam" : "templates/login/socials/steam.php",
+                    "google" : "templates/login/socials/google.php"
+                },
+                "pwd_recover" : "templates/login/pwd_recover/pwd_recover.php"
             }
         }
     }

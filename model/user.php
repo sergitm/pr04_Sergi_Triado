@@ -103,7 +103,7 @@
          * Métode per modificar un usuari de la BBDD
          */
         public function update(){
-            $query = "UPDATE usuaris SET username = :username, pwd = :pwd, email = :email WHERE id = :id";
+            $query = "UPDATE usuaris SET username = :username, password = :pwd, email = :email WHERE id = :id";
 
             $params = array(':username' => strtoupper($this->getUsername()), ':pwd' => $this->getPwd(), ':email' => strtoupper($this->getEmail()), ':id' => $this->getId());
 
@@ -111,7 +111,11 @@
             $stmt = Connexio::execute($query, $params);
             Connexio::close();
             
-            return $stmt;
+            if ($stmt) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
         }
 
 

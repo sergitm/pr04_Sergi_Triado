@@ -47,10 +47,16 @@
                             isset($errors['pwd']['missing'])) ? 'text-danger' : 'text-info' ?>"><li class="col">*Els camps que es posin vermells són obligatoris.</li></small>
                     </ul>
                 <div class="container d-inline-flex justify-content-start mb-3">
-                    <a href="../pwd_recover.php" class="align-self-center">No recordes la contrasenya? Recupera-la</a>
+                    <a href="../login/pwd_recover/user_check.php" class="align-self-center">No recordes la contrasenya? Recupera-la</a>
+                </div>
+                <div class="container d-inline-flex justify-content-start mb-3">
+                    <a href="signup.php" class="align-self-center">No tens compte? Registra't!</a>
                 </div>
                 <div class="container d-inline-flex justify-content-between mb-3">
-                    <a href="signup.php" class="align-self-center">No tens compte? Registra't!</a>
+                    <div class="align-self-center">
+                        <a href="../login/socials/google.php" class="link-dark m-1"><i class="fa-brands fa-google fa-xl"></i></a>
+                        <a href="../login/socials/steam.php" class="link-dark m-1"><i class="fa-brands fa-square-steam fa-xl"></i></a>
+                    </div>
                     <input type="submit" class="btn btn-dark align-self-center" name="login" value="Entrar">
                 </div>
             </div>        

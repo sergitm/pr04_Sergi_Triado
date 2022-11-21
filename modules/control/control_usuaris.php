@@ -93,6 +93,18 @@
                 throw new Exception("No s'han trobat usuaris.");
             }
         }
+
+        public static function password_update($username, $pwd){
+            $usuari = self::get_usuari($username);
+
+            if($usuari === null){
+                return false;
+            }
+
+            $usuari->setPwd($pwd);
+
+            return $usuari->update();
+        }
     }
 
 ?>

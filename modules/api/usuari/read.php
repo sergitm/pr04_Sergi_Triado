@@ -21,6 +21,21 @@
         if (!empty($_POST['email'])) {
             if (ControlUsuaris::email_exists($_POST['email'])) $res = array('email' => true);
         }
+        if (!empty($_POST['identifier'])) {
+            try{
+                $user = ControlUsuaris::get_usuari($_POST['identifier']);
+    
+                $res = array(
+                    'check' => true,
+                    'user' => $user
+                );
+            } catch(Exception $e){
+                $res = array(
+                    'check' => false,
+                    'missatge' => "L'usuari no existeix"
+                );
+            }
+        }
     }
 
     if (!empty($_POST['identifier']) && !empty($_POST['login'])) {

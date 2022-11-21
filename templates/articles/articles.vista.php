@@ -17,7 +17,7 @@
     <link href="public/fontawesome/css/brands.css" rel="stylesheet">
     <link href="public/fontawesome/css/solid.css" rel="stylesheet">
 	<link rel="stylesheet" href="public/styles/estils.css"> <!-- feu referència al vostre fitxer d'estils -->
-	<title>Paginació</title>
+	<title>Articles</title>
 </head>
 <body>
 	<div class="contenidor">
